@@ -128,3 +128,4 @@ dmypy.json
 .idea/
 test.py
 screen.png
+config.yml
