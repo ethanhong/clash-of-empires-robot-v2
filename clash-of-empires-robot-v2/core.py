@@ -14,10 +14,6 @@ def log(*args):
     print(' '.join(str(word) for word in message))
 
 
-def get_error_msg():  # todo get_error_msg()
-    pass
-
-
 def wait(icon: Icon, area=None, timeout=20):  # timeout counts in seconds
     start_time = time.time()
     while (time.time() - start_time) < timeout:
@@ -26,10 +22,8 @@ def wait(icon: Icon, area=None, timeout=20):  # timeout counts in seconds
                 break
         elif icon.visible_in(area):
             break
-        elif get_error_msg():
-            raise TimeoutError('detect error screen in wait()')
     else:
-        raise TimeoutError('Can not find button: {}'.format(icon))
+        raise TimeoutError('Can not find icon: {}'.format(icon))
 
 
 def hms2secs(h, m, s):

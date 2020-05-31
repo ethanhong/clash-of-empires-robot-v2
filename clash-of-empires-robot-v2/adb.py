@@ -38,6 +38,14 @@ def kill_server():
     subprocess.check_output('adb kill-server')
 
 
+def launch_coe():
+    subprocess.check_output(adb_shell() + 'am start -n com.leme.coe/com.leme.coe.MainActivity')
+
+
+def force_stop_coe():
+    subprocess.check_output(adb_shell() + 'am force-stop com.leme.coe')
+
+
 def screenshot():
     subprocess.check_output(adb_shell() + 'screencap -p /sdcard/screen.png')
     subprocess.check_output('adb -s localhost:{} pull /sdcard/screen.png'.format(current_port))

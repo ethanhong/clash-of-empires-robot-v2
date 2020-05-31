@@ -56,12 +56,30 @@ def switch_window():
     log('tribute_collect_interval: {}'.format(COEs[0].tribute_collect_interval))
 
 
-def coe_bot():
-    try:
-        # main loop starts from here
-        window_switch_timestamp = 0
-        while True:
+def internet_on():
+    pass
 
+
+def restart():
+    log(' - Force stop COE')
+    adb.force_stop_coe()
+
+    log(' - Checking internet status ...')
+    while not internet_on():
+        sleep(5)
+    log('   Internet status: OK')
+
+    log(' - Launching COE ...')
+    adb.launch_coe()
+    wait(kingdom, timeout=300)
+
+    log('Restart successful!')
+
+
+def coe_bot():
+    window_switch_timestamp = 0
+    while True:
+        try:
             # --- ally help --- #
             if ally_need_help():
                 help_ally()
@@ -112,14 +130,16 @@ def coe_bot():
                 switch_window()
                 window_switch_timestamp = time.time()
 
-            # --- special event detection -- #
-            # test
+        except (TimeoutError, TypeError) as err:
+            adb.screenshot().save('err_' + time.strftime('%m%d%H%M%S', time.localtime()) + '.png')
+            log('[ ***** ERROR Caught: ', err, ' *****  ]')
+            log('Restarting COE ...')
+            restart()
+            continue
 
-    except (TimeoutError, TypeError) as e:
-        log(e)
-
-    except (KeyboardInterrupt, SystemExit):
-        log('Interrupt by user')
+        except (KeyboardInterrupt, SystemExit):
+            log('Interrupt by user')
+            break
 
 
 if __name__ == '__main__':
