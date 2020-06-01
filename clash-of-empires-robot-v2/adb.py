@@ -22,13 +22,14 @@ ERROR = -1
 
 
 def adb_command(cmd):
+    cmd = cmd.split()
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-    out, err = p.communicate()
-    return out.decode("utf-8"), err
+    out = p.communicate()[0]
+    return out.decode("utf-8")
 
 
 def connect(port):
-    out, err = adb_command('adb connect localhost:{}'.format(port))
+    out = adb_command('adb connect localhost:{}'.format(port))
     if 'connected to localhost:{}'.format(port) in out:
         return SUCCESS
     else:
