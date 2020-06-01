@@ -125,6 +125,9 @@ def coe_bot():
                 COEs[0].wall_repair_time = time.time()
                 log('Repair wall complete')
 
+            # --- keep activate --- #
+            keep_activate()
+
             # --- switch window --- #
             if len(COEs) > 1 and time.time() - window_switch_timestamp > 60:  # every minute
                 switch_window()

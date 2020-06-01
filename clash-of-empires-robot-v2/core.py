@@ -1,3 +1,4 @@
+import random
 import time
 
 import pytesseract
@@ -239,3 +240,7 @@ def repair_wall():
     adb.tap((80, 912))
     adb.tap(back[1])
     go_kingdom_direct()
+
+
+def keep_activate():
+    adb.swipe([random.choice(['up', 'down', 'left', 'right'])])
