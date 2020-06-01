@@ -52,9 +52,10 @@ def switch_window():
     adb.current_port = COEs[0].port
     log('[Switched to {}]'.format(COEs[0].title))
     t = time.time()
-    log('resource_collect_time: {}'.format(round(t - COEs[0].resource_collect_time)))
-    log('tribute_collect_time: {}'.format(round(t - COEs[0].tribute_collect_time)))
-    log('tribute_collect_interval: {}'.format(COEs[0].tribute_collect_interval))
+    log(' - resource_collect_time: {}/1200'.
+        format(round(t - COEs[0].resource_collect_time)))
+    log(' - tribute_collect_time: {}/{}'.
+        format(round(t - COEs[0].tribute_collect_time), COEs[0].tribute_collect_interval))
 
 
 def internet_on():
