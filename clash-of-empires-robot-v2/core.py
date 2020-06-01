@@ -219,15 +219,25 @@ def go_gathering(res, mode='ordinary'):
 
 
 def collect_resource():
+    group1 = [(160, 290), (420, 530), (270, 530), (140, 510)]
+    group2 = [(278, 600), (235, 460), (107, 265), (355, 207)]
+    group3 = [(135, 526), (300, 245)]
+
     go_kingdom()
     go_castle()
-    adb.swipe(['top_right'] * 2)
-    adb.tap((70, 365))
-    adb.tap((240, 440))
-    adb.tap((335, 700))
-    adb.swipe(['right'] * 3)
-    adb.tap((260, 215))
-    adb.tap((100, 460))
+
+    adb.swipe(['top_right'] + ['up'] * 2)
+    for pos in group1:
+        adb.tap(pos)
+
+    adb.swipe(['right'] * 4)
+    for pos in group2:
+        adb.tap(pos)
+
+    adb.swipe(['down'] * 2)
+    for pos in group3:
+        adb.tap(pos)
+
     go_kingdom_direct()
 
 
