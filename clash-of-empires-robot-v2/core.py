@@ -41,7 +41,7 @@ def secs2hms(secs):
 def go_kingdom():
     for _ in range(5):  # try 5 times then abort
         if back.visible_in(TOP_WINDOW):
-            back.click()
+            adb.tap(back[1])
         else:
             break
     try:
@@ -61,7 +61,7 @@ def go_kingdom_direct():
 def go_castle():
     for _ in range(5):  # try 5 times then abort
         if back.visible():
-            back.click()
+            adb.tap(back[1])
         else:
             break
     try:
