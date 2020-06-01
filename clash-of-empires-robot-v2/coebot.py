@@ -1,4 +1,4 @@
-import random
+import subprocess
 import urllib.error
 import urllib.request
 from time import sleep
@@ -69,17 +69,23 @@ def internet_on():
 
 
 def restart():
-    log(' - Force stop COE')
+    log('[Restart]')
+    log(' - Reconnecting adb ...')
+    adb.disconnect(adb.current_port)
+    adb.connect(adb.current_port)
+
+    log(' - Stopping COE ...')
     adb.force_stop_coe()
 
     log(' - Checking internet status ...')
     while not internet_on():
         sleep(5)
-    log('   Internet status: OK')
 
     log(' - Launching COE ...')
     adb.launch_coe()
     wait(kingdom, timeout=300)
+    time.sleep(3)
+    adb.tap(empty_space)
 
     log('Restart successful!')
 
@@ -96,7 +102,7 @@ def coe_bot():
             # --- dispatch troops to gather --- #
             troop_status = get_troop_status()
             empty_slot = COEs[0].troop_slot - len(troop_status)
-            log('[Main Loop] troop_status = {}'.format(troop_status))
+            # log('[Main Loop] troop_status = {}'.format(troop_status))
 
             if COEs[0].super_mine_gathering \
                     and empty_slot > 0 \
@@ -141,10 +147,9 @@ def coe_bot():
                 switch_window()
                 window_switch_timestamp = time.time()
 
-        except (TimeoutError, TypeError) as err:
+        except (TimeoutError, TypeError, subprocess.TimeoutExpired) as err:
             adb.screenshot().save('err_' + time.strftime('%m%d%H%M%S', time.localtime()) + '.png')
             log('[ ***** ERROR Caught: ', err, ' *****  ]')
-            log('Restarting COE ...')
             restart()
             continue
 
