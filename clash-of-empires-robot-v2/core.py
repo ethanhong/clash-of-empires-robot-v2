@@ -226,7 +226,7 @@ def collect_resource():
     adb.tap((335, 700))
     adb.swipe(['right'] * 3)
     adb.tap((260, 215))
-    adb.tap((90, 450))
+    adb.tap((100, 460))
     go_kingdom_direct()
 
 
