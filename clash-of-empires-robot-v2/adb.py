@@ -6,6 +6,7 @@ r"""adb commands
 
 """
 import subprocess
+import time
 
 import PIL
 
@@ -13,6 +14,7 @@ import PIL
 current_port = 0  # this variable can be modified by other modules
 
 # constant
+DELAY_BETWEEN_SCREEN_EVENT = 1.00
 SUCCESS = 0
 ERROR = -1
 
@@ -61,6 +63,7 @@ def screenshot():
 
 def tap(coord):
     adb_command('adb -s localhost:{} shell input tap {} {}'.format(current_port, coord[0], coord[1]))
+    time.sleep(DELAY_BETWEEN_SCREEN_EVENT)
 
 
 def swipe(moves, duration=3000):
@@ -90,6 +93,7 @@ def swipe(moves, duration=3000):
         elif move == 'lower_left':
             adb_command('adb -s localhost:{} shell input swipe {} {} {} {} {}'.format(
                 current_port, tr[0], tr[1], ll[0], ll[1], duration))
+        time.sleep(DELAY_BETWEEN_SCREEN_EVENT)
 
 # def connect(port):
 #     p = subprocess.Popen('adb connect localhost:{}'.format(port), stdout=subprocess.PIPE)
