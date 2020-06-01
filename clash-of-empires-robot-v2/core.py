@@ -219,25 +219,13 @@ def go_gathering(res, mode='ordinary'):
 
 
 def collect_resource():
-    group1 = [(160, 290), (420, 530), (270, 530), (140, 510)]
-    group2 = [(278, 600), (235, 460), (107, 265), (355, 207)]
-    group3 = [(135, 526), (300, 245)]
-
+    jump_islands = [(343, 680), (11, 387), (160, 138), (40, 439), (78, 306),
+                    (77, 335), (190, 751), (65, 311), (303, 186), (453, 142)]
     go_kingdom()
     go_castle()
-
-    adb.swipe(['top_right'] + ['up'] * 2)
-    for pos in group1:
+    adb.swipe(['up'] * 3)
+    for pos in jump_islands:
         adb.tap(pos)
-
-    adb.swipe(['right'] * 4)
-    for pos in group2:
-        adb.tap(pos)
-
-    adb.swipe(['down'] * 2)
-    for pos in group3:
-        adb.tap(pos)
-
     go_kingdom_direct()
 
 
