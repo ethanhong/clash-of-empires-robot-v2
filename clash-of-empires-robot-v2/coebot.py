@@ -1,4 +1,6 @@
 import random
+import urllib.error
+import urllib.request
 from time import sleep
 
 import yaml
@@ -59,7 +61,11 @@ def switch_window():
 
 
 def internet_on():
-    pass
+    try:
+        urllib.request.urlopen('http://216.58.192.142', timeout=10)
+        return True
+    except urllib.error.URLError:
+        return False
 
 
 def restart():
