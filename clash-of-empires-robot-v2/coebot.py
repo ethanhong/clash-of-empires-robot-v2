@@ -31,6 +31,7 @@ def initialize():
     # load config file
     configs = load_config()
 
+    adb.kill_server()
     for title, config in configs.items():
         if adb.connect(config['adb_port']) == adb.SUCCESS:
             COEs.append(COE(title, config))
