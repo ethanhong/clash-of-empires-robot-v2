@@ -1,20 +1,20 @@
 ---
 BS1:
-  serial_no: 127.0.0.1:5565
+  serial_no: '127.0.0.1:5565'
   troop_slot: 3
   wall_repair: False
   super_mine_gathering: False
   resource_type: ['wood']
 
 BS2:
-  serial_no: 127.0.0.1:5575
+  serial_no: '127.0.0.1:5575'
   troop_slot: 3
   wall_repair: False
   super_mine_gathering: False
   resource_type: ['wood']
 
 BS3:
-  serial_no: 127.0.0.1:5585
+  serial_no: '127.0.0.1:5585'
   troop_slot: 3
   wall_repair: False
   super_mine_gathering: False
