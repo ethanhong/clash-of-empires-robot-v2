@@ -1,0 +1,29 @@
+---
+BS1:
+  adb_port: 5605
+  troop_slot: 3
+  wall_repair: False
+  super_mine_gathering: False
+  resource_type: ['wood']
+
+BS2:
+  adb_port: 5655
+  troop_slot: 3
+  wall_repair: False
+  super_mine_gathering: False
+  resource_type: ['wood']
+
+BS3:
+  adb_port: 5665
+  troop_slot: 3
+  wall_repair: False
+  super_mine_gathering: False
+  resource_type: ['food']
+
+BS4:
+  adb_port: 5785
+  troop_slot: 2
+  wall_repair: False
+  super_mine_gathering: False
+  resource_type: ['food', 'wood']
+...
