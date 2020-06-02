@@ -115,10 +115,11 @@ def collect_tribute():
     return countdown
 
 
-def get_troop_status():
+def get_troop_status(troop_slot):
     troop_info_area = [(8, 143, 30, 165),
                        (8, 183, 30, 205),
-                       (8, 223, 30, 245)]
+                       (8, 223, 30, 245),
+                       (8, 263, 30, 285)]
     ts_images = {'back': 'ts_back.png',
                  'enemy_atk': 'ts_enemy_atk.png',
                  'gathering': 'ts_gathering.png',
@@ -131,8 +132,8 @@ def get_troop_status():
 
     result = []
     go_kingdom()
-    for area in troop_info_area:
-        haystack = adb.screenshot().crop(area)
+    for i in range(troop_slot):
+        haystack = adb.screenshot().crop(troop_info_area[i])
         for status, img in ts_images.items():
             try:
                 im = PIL.Image.open(img_path(img))

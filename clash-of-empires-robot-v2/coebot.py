@@ -100,7 +100,7 @@ def coe_bot():
                 log('Help ally complete')
 
             # --- dispatch troops to gather --- #
-            troop_status = get_troop_status()
+            troop_status = get_troop_status(COEs[0].troop_slot)
             empty_slot = COEs[0].troop_slot - len(troop_status)
             # log('[Main Loop] troop_status = {}'.format(troop_status))
 
