@@ -18,7 +18,7 @@ def img_path(filename):
     return os.path.join(cwd, 'image', filename)
 
 
-class Icon:
+class Icon(object):
 
     def __init__(self, img, position):
         self.img = img

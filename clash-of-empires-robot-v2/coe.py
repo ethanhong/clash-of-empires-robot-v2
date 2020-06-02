@@ -4,7 +4,7 @@ import adb
 DEFAULT_TRIBUTE_COLLECT_INTERVAL = 600
 
 
-class COE:
+class COE(object):
 
     def __init__(self, title, config: dict):
         self.title = title
