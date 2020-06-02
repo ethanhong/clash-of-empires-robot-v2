@@ -1,29 +1,22 @@
 ---
 BS1:
-  adb_port: 5605
+  serial_no: 127.0.0.1:5565
   troop_slot: 3
   wall_repair: False
   super_mine_gathering: False
   resource_type: ['wood']
 
 BS2:
-  adb_port: 5655
+  serial_no: 127.0.0.1:5575
   troop_slot: 3
   wall_repair: False
   super_mine_gathering: False
   resource_type: ['wood']
 
 BS3:
-  adb_port: 5665
+  serial_no: 127.0.0.1:5585
   troop_slot: 3
   wall_repair: False
   super_mine_gathering: False
   resource_type: ['food']
-
-BS4:
-  adb_port: 5785
-  troop_slot: 2
-  wall_repair: False
-  super_mine_gathering: False
-  resource_type: ['food', 'wood']
 ...

@@ -35,10 +35,10 @@ def initialize():
 
     adb.kill_server()
     for title, config in configs.items():
-        if adb.connect(config['adb_port']) == adb.SUCCESS:
+        if adb.connect(config['serial_no']) == adb.SUCCESS:
             COEs.append(COE(title, config))
 
-    adb.current_port = COEs[0].port
+    adb.cur_serial_no = COEs[0].port
 
     log('Initialization finished. There are {} COE game found.'.format(len(COEs)))
     log('Configurations for each COE game:')
@@ -51,7 +51,7 @@ def initialize():
 def switch_window():
     global COEs
     COEs.append(COEs.pop(0))
-    adb.current_port = COEs[0].port
+    adb.cur_serial_no = COEs[0].port
     log('[Switched to {}]'.format(COEs[0].title))
     t = time.time()
     log(' - resource_collect_time: {}/1200'.
@@ -71,8 +71,8 @@ def internet_on():
 def restart():
     log('[Restart]')
     log(' - Reconnecting adb ...')
-    adb.disconnect(adb.current_port)
-    adb.connect(adb.current_port)
+    adb.disconnect(adb.cur_serial_no)
+    adb.connect(adb.cur_serial_no)
 
     log(' - Stopping COE ...')
     adb.force_stop_coe()
