@@ -221,7 +221,8 @@ def go_gathering(res, mode='ordinary'):
 
 def collect_resource():
     jump_islands = [(343, 680), (11, 387), (160, 138), (40, 439), (78, 306),
-                    (77, 335), (190, 751), (65, 311), (303, 186), (453, 142)]
+                    (77, 335), (190, 751), (65, 311), (303, 186), (453, 142),
+                    ]
     go_kingdom()
     go_castle()
     adb.swipe(['up'] * 3)
