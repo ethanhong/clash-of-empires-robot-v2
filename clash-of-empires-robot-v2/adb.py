@@ -65,6 +65,13 @@ def screenshot():
     return PIL.Image.open('screen.png').convert('RGB')
 
 
+def screen_size():
+    out = run('adb -s {} shell wm size'.format(cur_serial_no))
+    out = out.split()[-1].split('x')
+    out = [int(x) for x in out]  # convert str to int
+    return str(min(out)) + 'x' + str(max(out))  # output a string
+
+
 def tap(coord):
     run('adb -s {} shell input tap {} {}'.format(cur_serial_no, coord[0], coord[1]))
     time.sleep(DELAY_BETWEEN_SCREEN_EVENT)
