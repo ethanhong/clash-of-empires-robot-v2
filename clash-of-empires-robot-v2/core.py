@@ -41,19 +41,19 @@ def secs2hms(secs):
 def go_kingdom():
     for _ in range(5):  # try 5 times then abort
         if back.visible_in(top_window):
-            adb.tap(back[1])
+            adb.tap(back[0])
         else:
             break
     try:
         wait(castle, area=bot_window, timeout=5)
     except TimeoutError:
-        adb.tap(kingdom[1])
+        adb.tap(kingdom[0])
         wait(castle, area=bot_window, timeout=60)
         log('go_kingdom complete')
 
 
 def go_kingdom_direct():
-    adb.tap(kingdom[1])
+    adb.tap(kingdom[0])
     wait(castle, area=bot_window, timeout=60)
     log('Go kingdom directly')
 
@@ -61,13 +61,13 @@ def go_kingdom_direct():
 def go_castle():
     for _ in range(5):  # try 5 times then abort
         if back.visible():
-            adb.tap(back[1])
+            adb.tap(back[0])
         else:
             break
     try:
         wait(kingdom, area=bot_window, timeout=5)
     except TimeoutError:
-        adb.tap(castle[1])
+        adb.tap(castle[0])
         wait(kingdom, area=bot_window, timeout=60)
         log('go_castle complete')
 
@@ -77,7 +77,7 @@ def ally_need_help():
 
 
 def help_ally():
-    adb.tap(ally_help[1])
+    adb.tap(ally_help[0])
 
 
 def img2str(im, config):
@@ -175,14 +175,14 @@ def gather_super_mine(mode='ordinary'):
     time.sleep(3)
 
     if gather.visible_in(mid_window):
-        adb.tap(gather[1])
+        adb.tap(gather[0])
         time.sleep(3)
     else:
         log('Troop in super mine already')
         return False
 
     if train.visible_in(mid_window):
-        adb.tap(back[1])
+        adb.tap(back[0])
         log('No troops for gathering')
     else:
         if mode == 'half':
@@ -206,10 +206,10 @@ def go_gathering(res, mode='ordinary'):
     time.sleep(5)
     adb.tap(screen_center)
     time.sleep(3)
-    adb.tap(gather[1])
+    adb.tap(gather[0])
     time.sleep(3)
     if train.visible_in(mid_window):
-        adb.tap(back[1])
+        adb.tap(back[0])
         log('No troops for gathering')
     else:
         if mode == 'half':
@@ -241,7 +241,7 @@ def repair_wall():
     go_castle()
     for island in jump_islands:
         adb.tap(island)
-    adb.tap(back[1])
+    adb.tap(back[0])
     go_kingdom_direct()
 
 

@@ -19,15 +19,15 @@ def img_path(filename):
 
 class Icon(object):
 
-    def __init__(self, img, position):
+    def __init__(self, position, img):
         self.img = img
         self.position = position
 
     def __getitem__(self, key):
         if key == 0:
-            return self.img
-        elif key == 1:
             return self.position
+        elif key == 1:
+            return self.img
 
     def __repr__(self):
         return str([self.img, self.position])
@@ -46,12 +46,12 @@ class Icon(object):
 
 
 # icons
-back = Icon('back.png', (30, 35))
-castle = Icon('castle.png', (65, 890))
-kingdom = Icon('kingdom.png', (65, 890))
-ally_help = Icon('ally_help.png', (422, 783))
-gather = Icon('gather.png', (400, 480))
-train = Icon('train.png', (360, 460))
+back = Icon((30, 35), 'back.png')
+castle = Icon((65, 890), 'castle.png')
+kingdom = Icon((65, 890), 'kingdom.png')
+ally_help = Icon((422, 783), 'ally_help.png')
+gather = Icon((400, 480), 'gather.png')
+train = Icon((360, 460), 'train.png')
 
 # coordinates
 screen_center = (270, 480)
