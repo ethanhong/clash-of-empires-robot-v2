@@ -1,7 +1,7 @@
 r"""adb commands
 
-    - connect(port): connect devices through localhost:port
-    - disconnect(port): connect devices through localhost:port
+    - connect(serial_no): connect devices through serial_no
+    - disconnect(serial_no): connect devices through serial_no
     - kill_server(): kill all adb connections
 
 """

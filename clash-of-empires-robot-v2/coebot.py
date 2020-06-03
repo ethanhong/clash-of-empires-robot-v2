@@ -38,7 +38,7 @@ def initialize():
         if adb.connect(config['serial_no']) == adb.SUCCESS:
             devices.append(Device(title, config))
 
-    adb.cur_serial_no = devices[0].port
+    adb.cur_serial_no = devices[0].serial_no
 
     log('Initialization finished. There are {} device(s) found.'.format(len(devices)))
     log('Configurations for each device:')
@@ -51,7 +51,7 @@ def initialize():
 def switch_window():
     global devices
     devices.append(devices.pop(0))
-    adb.cur_serial_no = devices[0].port
+    adb.cur_serial_no = devices[0].serial_no
     log('[Switched to {}]'.format(devices[0].title))
     t = time.time()
     log(' - resource_collect_time: {}/1200'.
