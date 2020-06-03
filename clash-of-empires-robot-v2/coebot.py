@@ -5,11 +5,11 @@ from time import sleep
 
 import yaml
 
-from coe import COE
+from device import Device
 from core import *
 
 # global variables
-COEs = []
+devices = []
 
 
 def countdown_timer(secs):
@@ -29,35 +29,35 @@ def load_config():
 
 def initialize():
     log('Initializing ...')
-    global COEs
+    global devices
     # load config file
     configs = load_config()
 
     adb.kill_server()
     for title, config in configs.items():
         if adb.connect(config['serial_no']) == adb.SUCCESS:
-            COEs.append(COE(title, config))
+            devices.append(Device(title, config))
 
-    adb.cur_serial_no = COEs[0].port
+    adb.cur_serial_no = devices[0].port
 
-    log('Initialization finished. There are {} COE game found.'.format(len(COEs)))
-    log('Configurations for each COE game:')
-    for coe in COEs:
+    log('Initialization finished. There are {} device(s) found.'.format(len(devices)))
+    log('Configurations for each device:')
+    for d in devices:
         log(' - title: {}, troop_slot:{}, wall_repair: {}, super_mine_gathering: {}, resource_type: {}'.format(
-            coe.title, coe.troop_slot, coe.wall_repair, coe.super_mine_gathering, coe.resource_type))
-    log('[Playing {}]'.format(COEs[0].title))
+            d.title, d.troop_slot, d.wall_repair, d.super_mine_gathering, d.resource_type))
+    log('[Playing {}]'.format(devices[0].title))
 
 
 def switch_window():
-    global COEs
-    COEs.append(COEs.pop(0))
-    adb.cur_serial_no = COEs[0].port
-    log('[Switched to {}]'.format(COEs[0].title))
+    global devices
+    devices.append(devices.pop(0))
+    adb.cur_serial_no = devices[0].port
+    log('[Switched to {}]'.format(devices[0].title))
     t = time.time()
     log(' - resource_collect_time: {}/1200'.
-        format(round(t - COEs[0].resource_collect_time)))
+        format(round(t - devices[0].resource_collect_time)))
     log(' - tribute_collect_time: {}/{}'.
-        format(round(t - COEs[0].tribute_collect_time), COEs[0].tribute_collect_interval))
+        format(round(t - devices[0].tribute_collect_time), devices[0].tribute_collect_interval))
 
 
 def internet_on():
@@ -91,6 +91,7 @@ def restart():
 
 
 def coe_bot():
+    global devices
     window_switch_timestamp = 0
     while True:
         try:
@@ -100,50 +101,50 @@ def coe_bot():
                 log('Help ally complete')
 
             # --- dispatch troops to gather --- #
-            troop_status = get_troop_status(COEs[0].troop_slot)
-            empty_slot = COEs[0].troop_slot - len(troop_status)
+            troop_status = get_troop_status(devices[0].troop_slot)
+            empty_slot = devices[0].troop_slot - len(troop_status)
             # log('[Main Loop] troop_status = {}'.format(troop_status))
 
-            if COEs[0].super_mine_gathering \
+            if devices[0].super_mine_gathering \
                     and empty_slot > 0 \
                     and gather_super_mine(mode='ordinary'):
                 empty_slot -= 1
 
             while empty_slot > 0:
-                target_resource = random.choice(COEs[0].resource_type)
+                target_resource = random.choice(devices[0].resource_type)
                 go_gathering(target_resource, mode='ordinary')
                 empty_slot -= 1
 
             # --- collect tribute --- #
-            if time.time() - COEs[0].tribute_collect_time > COEs[0].tribute_collect_interval:
+            if time.time() - devices[0].tribute_collect_time > devices[0].tribute_collect_interval:
                 log('Go collecting tribute')
                 countdown = collect_tribute()
                 if countdown is None:
-                    COEs[0].tribute_collect_interval = COEs[0].default_tribute_collect_interval
+                    devices[0].tribute_collect_interval = devices[0].default_tribute_collect_interval
                 else:
-                    COEs[0].tribute_collect_interval = countdown
-                COEs[0].tribute_collect_time = time.time()
-                log('Tribute collect complete. Will be back in', secs2hms(COEs[0].tribute_collect_interval))
+                    devices[0].tribute_collect_interval = countdown
+                devices[0].tribute_collect_time = time.time()
+                log('Tribute collect complete. Will be back in', secs2hms(devices[0].tribute_collect_interval))
 
             # --- collect resources --- #
-            if time.time() - COEs[0].resource_collect_time > 1200:  # every 20 minutes
+            if time.time() - devices[0].resource_collect_time > 1200:  # every 20 minutes
                 log('Go collecting resources')
                 collect_resource()
-                COEs[0].resource_collect_time = time.time()
+                devices[0].resource_collect_time = time.time()
                 log('Resources collect complete')
 
             # --- repair wall --- #
-            if COEs[0].wall_repair and time.time() - COEs[0].wall_repair_time > 1800:  # every 30 minutes
+            if devices[0].wall_repair and time.time() - devices[0].wall_repair_time > 1800:  # every 30 minutes
                 log('Start repair wall')
                 repair_wall()
-                COEs[0].wall_repair_time = time.time()
+                devices[0].wall_repair_time = time.time()
                 log('Repair wall complete')
 
             # --- keep activate --- #
             keep_activate()
 
             # --- switch window --- #
-            if len(COEs) > 1 and time.time() - window_switch_timestamp > 60:  # every minute
+            if len(devices) > 1 and time.time() - window_switch_timestamp > 60:  # every minute
                 switch_window()
                 window_switch_timestamp = time.time()
 

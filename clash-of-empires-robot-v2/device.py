@@ -1,7 +1,7 @@
 import adb
 
 
-class COE(object):
+class Device(object):
 
     def __init__(self, title, config: dict):
         self.title = title
