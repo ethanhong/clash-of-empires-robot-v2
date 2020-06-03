@@ -7,9 +7,9 @@ import adb
 
 # constants
 GAME_WINDOW = (0, 0, 540, 1000)
-TOP_WINDOW = (0, 0, 540, 333)
-MID_WINDOW = (0, 333, 540, 666)
-BOT_WINDOW = (0, 666, 540, 1000)
+top_window = (0, 0, 540, 333)
+mid_window = (0, 333, 540, 666)
+bot_window = (0, 666, 540, 1000)
 IMG_MATCH_CONFIDENCE = 0.8
 
 

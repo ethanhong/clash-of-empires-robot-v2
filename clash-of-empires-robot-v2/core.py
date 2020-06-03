@@ -40,21 +40,21 @@ def secs2hms(secs):
 
 def go_kingdom():
     for _ in range(5):  # try 5 times then abort
-        if back.visible_in(TOP_WINDOW):
+        if back.visible_in(top_window):
             adb.tap(back[1])
         else:
             break
     try:
-        wait(castle, area=BOT_WINDOW, timeout=5)
+        wait(castle, area=bot_window, timeout=5)
     except TimeoutError:
         adb.tap(kingdom[1])
-        wait(castle, area=BOT_WINDOW, timeout=60)
+        wait(castle, area=bot_window, timeout=60)
         log('go_kingdom complete')
 
 
 def go_kingdom_direct():
     adb.tap(kingdom[1])
-    wait(castle, area=BOT_WINDOW, timeout=60)
+    wait(castle, area=bot_window, timeout=60)
     log('Go kingdom directly')
 
 
@@ -65,15 +65,15 @@ def go_castle():
         else:
             break
     try:
-        wait(kingdom, area=BOT_WINDOW, timeout=5)
+        wait(kingdom, area=bot_window, timeout=5)
     except TimeoutError:
         adb.tap(castle[1])
-        wait(kingdom, area=BOT_WINDOW, timeout=60)
+        wait(kingdom, area=bot_window, timeout=60)
         log('go_castle complete')
 
 
 def ally_need_help():
-    return ally_help.visible_in(BOT_WINDOW)
+    return ally_help.visible_in(bot_window)
 
 
 def help_ally():
@@ -174,14 +174,14 @@ def gather_super_mine(mode='ordinary'):
     adb.tap(screen_center)
     time.sleep(3)
 
-    if gather.visible_in(MID_WINDOW):
+    if gather.visible_in(mid_window):
         adb.tap(gather[1])
         time.sleep(3)
     else:
         log('Troop in super mine already')
         return False
 
-    if train.visible_in(MID_WINDOW):
+    if train.visible_in(mid_window):
         adb.tap(back[1])
         log('No troops for gathering')
     else:
@@ -208,7 +208,7 @@ def go_gathering(res, mode='ordinary'):
     time.sleep(3)
     adb.tap(gather[1])
     time.sleep(3)
-    if train.visible_in(MID_WINDOW):
+    if train.visible_in(mid_window):
         adb.tap(back[1])
         log('No troops for gathering')
     else:
