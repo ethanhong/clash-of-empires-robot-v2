@@ -6,6 +6,7 @@ class Device(object):
     def __init__(self, title, config: dict):
         self.title = title
         self.serial_no = config['serial_no']
+        self.size = ''
         self.troop_slot = config['troop_slot']
         self.wall_repair = config['wall_repair']
         self.super_mine_gathering = config['super_mine_gathering']

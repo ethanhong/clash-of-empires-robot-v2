@@ -36,15 +36,17 @@ def initialize():
     adb.kill_server()
     for title, config in configs.items():
         if adb.connect(config['serial_no']) == adb.SUCCESS:
-            devices.append(Device(title, config))
+            device = Device(title, config)
+            device.size = adb.screen_size(config['serial_no'])
+            devices.append(device)
 
     adb.cur_serial_no = devices[0].serial_no
 
     log('Initialization finished. There are {} device(s) found.'.format(len(devices)))
     log('Configurations for each device:')
     for d in devices:
-        log(' - title: {}, troop_slot:{}, wall_repair: {}, super_mine_gathering: {}, resource_type: {}'.format(
-            d.title, d.troop_slot, d.wall_repair, d.super_mine_gathering, d.resource_type))
+        log(' - title: {}, troop_slot:{}, wall_repair: {}, super_mine_gathering: {}, resource_type: {}, size: {}'.
+            format(d.title, d.troop_slot, d.wall_repair, d.super_mine_gathering, d.resource_type, d.size))
     log('[Playing {}]'.format(devices[0].title))
 
 

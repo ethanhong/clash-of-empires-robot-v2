@@ -65,8 +65,8 @@ def screenshot():
     return PIL.Image.open('screen.png').convert('RGB')
 
 
-def screen_size():
-    out = run('adb -s {} shell wm size'.format(cur_serial_no))
+def screen_size(serial_no):
+    out = run('adb -s {} shell wm size'.format(serial_no))
     out = out.split()[-1].split('x')
     out = [int(x) for x in out]  # convert str to int
     return str(min(out)) + 'x' + str(max(out))  # output a string
