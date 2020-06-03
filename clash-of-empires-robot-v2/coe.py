@@ -1,8 +1,5 @@
 import adb
 
-# constants
-DEFAULT_TRIBUTE_COLLECT_INTERVAL = 600
-
 
 class COE(object):
 
@@ -16,7 +13,8 @@ class COE(object):
         self.resource_collect_time = 0
         self.tribute_collect_time = 0
         self.wall_repair_time = 0
-        self.tribute_collect_interval = DEFAULT_TRIBUTE_COLLECT_INTERVAL
+        self.default_tribute_collect_interval = config['default_tribute_collect_interval']
+        self.tribute_collect_interval = self.default_tribute_collect_interval
 
     def connect(self):
         return adb.connect(self.port)

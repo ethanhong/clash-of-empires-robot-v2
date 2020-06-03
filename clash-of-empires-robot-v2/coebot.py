@@ -5,7 +5,7 @@ from time import sleep
 
 import yaml
 
-from coe import COE, DEFAULT_TRIBUTE_COLLECT_INTERVAL
+from coe import COE
 from core import *
 
 # global variables
@@ -119,7 +119,7 @@ def coe_bot():
                 log('Go collecting tribute')
                 countdown = collect_tribute()
                 if countdown is None:
-                    COEs[0].tribute_collect_interval = DEFAULT_TRIBUTE_COLLECT_INTERVAL
+                    COEs[0].tribute_collect_interval = COEs[0].default_tribute_collect_interval
                 else:
                     COEs[0].tribute_collect_interval = countdown
                 COEs[0].tribute_collect_time = time.time()

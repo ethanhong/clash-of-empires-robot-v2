@@ -5,6 +5,7 @@ BS1:
   wall_repair: False
   super_mine_gathering: False
   resource_type: ['wood']
+  default_tribute_collect_interval: 600
 
 BS2:
   serial_no: '127.0.0.1:5575'
@@ -12,6 +13,7 @@ BS2:
   wall_repair: False
   super_mine_gathering: False
   resource_type: ['wood']
+  default_tribute_collect_interval: 600
 
 BS3:
   serial_no: '127.0.0.1:5585'
@@ -19,4 +21,5 @@ BS3:
   wall_repair: False
   super_mine_gathering: False
   resource_type: ['food']
+  default_tribute_collect_interval: 600
 ...
