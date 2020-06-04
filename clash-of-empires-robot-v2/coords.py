@@ -44,6 +44,7 @@ mid_window = None
 bot_window = None
 troop_info_area = None
 super_mine_coord_locations = None
+tribute_countdown_box = None
 
 # icons
 back = None

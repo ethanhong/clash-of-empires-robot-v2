@@ -6,6 +6,7 @@
   bot_window: [0, 640, 540, 960]
   troop_info_area: [[8, 143, 30, 165], [8, 183, 30, 205], [8, 223, 30, 245], [8, 263, 30, 285]]
   super_mine_coord_locations: [[63, 460, 210, 477], [330, 460, 487, 477], [63, 710, 210, 727], [330, 710, 487, 727]]
+  tribute_countdown_box: [235, 555, 305, 580]
   # icons
   back: [[30, 35], 'back.png']
   castle: [[65, 890], 'castle.png']

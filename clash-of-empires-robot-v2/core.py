@@ -93,9 +93,8 @@ def img2str(im, config):
 
 
 def tribute_countdown():
-    msg_box = (235, 555, 305, 580)
     try:
-        img = adb.screenshot().crop(msg_box)
+        img = adb.screenshot().crop(coords.tribute_countdown_box)
         # img = img.point(lambda i: i < 100 and 255)
         img = PIL.ImageOps.invert(img)
         s = img2str(img, config=r'--psm 10')
@@ -274,6 +273,7 @@ def load_coordinates(size):
     coords.bot_window = coordinate['bot_window']
     coords.troop_info_area = coordinate['troop_info_area']
     coords.super_mine_coord_locations = coordinate['super_mine_coord_locations']
+    coords.tribute_countdown_box = coordinate['tribute_countdown_box']
     # icons
     coords.back = Icon(coordinate['back'][0], img_path(coordinate['back'][1]))
     coords.castle = Icon(coordinate['castle'][0], img_path(coordinate['castle'][1]))
