@@ -3,7 +3,6 @@ import urllib.error
 import urllib.request
 from time import sleep
 
-import device
 from core import *
 
 # global variables

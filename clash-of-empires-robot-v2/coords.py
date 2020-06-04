@@ -1,11 +1,3 @@
-import os
-
-import PIL
-import pyautogui
-import yaml
-
-import adb
-
 # # areas
 # top_window = (0, 0, 540, 320)
 # mid_window = (0, 320, 540, 640)
