@@ -107,13 +107,10 @@ def tribute_countdown():
 
 
 def collect_tribute():
-    # jump_islands = [(460, 200), (488, 445), (525, 505)]
-
     go_kingdom()
     go_castle()
     for island in coords.tribute_islands:
         adb.tap(island)
-    adb.tap(coords.tribute)
     adb.tap(coords.msg_confirm)
     time.sleep(3)
     countdown = tribute_countdown()
@@ -125,10 +122,6 @@ def collect_tribute():
 
 
 def get_troop_status(troop_slot):
-    # troop_info_area = [(8, 143, 30, 165),
-    #                    (8, 183, 30, 205),
-    #                    (8, 223, 30, 245),
-    #                    (8, 263, 30, 285)]
     ts_images = {'back': 'ts_back.png',
                  'enemy_atk': 'ts_enemy_atk.png',
                  'gathering': 'ts_gathering.png',
@@ -160,10 +153,6 @@ def gather_super_mine(mode='ordinary'):
     adb.tap(coords.territory)
     adb.tap(coords.super_mine)
 
-    # coordinate_locations = [(63, 460, 210, 477),  # farm
-    #                         (330, 460, 487, 477),  # sawmill
-    #                         (63, 710, 210, 727),  # iron mine
-    #                         (330, 710, 487, 727)]  # silver mine
     screenshot = adb.screenshot()
     for loc in coords.super_mine_coord_locations:
         im = screenshot.crop(loc)
@@ -230,10 +219,6 @@ def go_gathering(res, mode='ordinary'):
 
 
 def collect_resource():
-    # jump_islands = [(360, 720), (250, 642), (288, 653), (11, 387), (160, 138),
-    #                 (40, 439), (78, 306), (77, 335), (190, 751), (65, 311),
-    #                 (303, 186), (453, 142),
-    #                 ]
     go_kingdom()
     go_castle()
     for island in coords.resource_islands:
@@ -242,8 +227,6 @@ def collect_resource():
 
 
 def repair_wall():
-    # jump_islands = [(360, 720), (475, 530), (533, 590), (270, 450), (80, 912),
-    #                 ]
     go_kingdom()
     go_castle()
     for island in coords.wall_repair_islands:
@@ -283,7 +266,6 @@ def load_coordinates(size):
     coords.train = Icon(coordinate['train'][0], img_path(coordinate['train'][1]))
     # coordinate
     coords.screen_center = coordinate['screen_center']
-    coords.tribute = coordinate['tribute']
     coords.msg_confirm = coordinate['msg_confirm']
     coords.empty_space = coordinate['empty_space']
     coords.alliance = coordinate['alliance']
