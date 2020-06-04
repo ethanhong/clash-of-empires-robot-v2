@@ -67,6 +67,8 @@ def screenshot():
 
 def screen_size(serial_no):
     out = run('adb -s {} shell wm size'.format(serial_no))
+    if out == '':
+        return None
     out = out.split()[-1].split('x')
     out = [int(x) for x in out]  # convert str to int
     return str(min(out)) + 'x' + str(max(out))  # output a string

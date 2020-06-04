@@ -35,7 +35,8 @@ def initialize():
         if adb.connect(config['serial_no']) == adb.SUCCESS:
             d = device.Device(title, config)
             d.size = adb.screen_size(config['serial_no'])
-            devices.append(d)
+            if d.size is not None:
+                devices.append(d)
 
     adb.cur_serial_no = devices[0].serial_no
     device.screen_size = devices[0].size
