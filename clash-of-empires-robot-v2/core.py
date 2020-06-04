@@ -1,9 +1,16 @@
+import os
 import random
 import time
 
+import PIL
+import pyautogui
 import pytesseract
+import yaml
 
-from coords import *
+import adb
+import coords
+import device
+from icon import Icon, IMG_MATCH_CONFIDENCE
 
 
 def log(*args):
@@ -40,44 +47,44 @@ def secs2hms(secs):
 
 def go_kingdom():
     for _ in range(5):  # try 5 times then abort
-        if back.visible_in(top_window):
-            adb.tap(back[0])
+        if coords.back.visible_in(coords.top_window):
+            adb.tap(coords.back[0])
         else:
             break
     try:
-        wait(castle, area=bot_window, timeout=5)
+        wait(coords.castle, area=coords.bot_window, timeout=5)
     except TimeoutError:
-        adb.tap(kingdom[0])
-        wait(castle, area=bot_window, timeout=60)
+        adb.tap(coords.kingdom[0])
+        wait(coords.castle, area=coords.bot_window, timeout=60)
         log('go_kingdom complete')
 
 
 def go_kingdom_direct():
-    adb.tap(kingdom[0])
-    wait(castle, area=bot_window, timeout=60)
+    adb.tap(coords.kingdom[0])
+    wait(coords.castle, area=coords.bot_window, timeout=60)
     log('Go kingdom directly')
 
 
 def go_castle():
     for _ in range(5):  # try 5 times then abort
-        if back.visible():
-            adb.tap(back[0])
+        if coords.back.visible():
+            adb.tap(coords.back[0])
         else:
             break
     try:
-        wait(kingdom, area=bot_window, timeout=5)
+        wait(coords.kingdom, area=coords.bot_window, timeout=5)
     except TimeoutError:
-        adb.tap(castle[0])
-        wait(kingdom, area=bot_window, timeout=60)
+        adb.tap(coords.castle[0])
+        wait(coords.kingdom, area=coords.bot_window, timeout=60)
         log('go_castle complete')
 
 
 def ally_need_help():
-    return ally_help.visible_in(bot_window)
+    return coords.ally_help.visible_in(coords.bot_window)
 
 
 def help_ally():
-    adb.tap(ally_help[0])
+    adb.tap(coords.ally_help[0])
 
 
 def img2str(im, config):
@@ -101,28 +108,28 @@ def tribute_countdown():
 
 
 def collect_tribute():
-    jump_islands = [(460, 200), (488, 445), (525, 505)]
+    # jump_islands = [(460, 200), (488, 445), (525, 505)]
 
     go_kingdom()
     go_castle()
-    for island in jump_islands:
+    for island in coords.tribute_islands:
         adb.tap(island)
-    adb.tap(tribute)
-    adb.tap(msg_confirm)
+    adb.tap(coords.tribute)
+    adb.tap(coords.msg_confirm)
     time.sleep(3)
     countdown = tribute_countdown()
     if countdown is None:
         countdown = tribute_countdown()  # try one more time
-    adb.tap(empty_space)
+    adb.tap(coords.empty_space)
     go_kingdom_direct()
     return countdown
 
 
 def get_troop_status(troop_slot):
-    troop_info_area = [(8, 143, 30, 165),
-                       (8, 183, 30, 205),
-                       (8, 223, 30, 245),
-                       (8, 263, 30, 285)]
+    # troop_info_area = [(8, 143, 30, 165),
+    #                    (8, 183, 30, 205),
+    #                    (8, 223, 30, 245),
+    #                    (8, 263, 30, 285)]
     ts_images = {'back': 'ts_back.png',
                  'enemy_atk': 'ts_enemy_atk.png',
                  'gathering': 'ts_gathering.png',
@@ -136,7 +143,7 @@ def get_troop_status(troop_slot):
     result = []
     go_kingdom()
     for i in range(troop_slot):
-        haystack = adb.screenshot().crop(troop_info_area[i])
+        haystack = adb.screenshot().crop(coords.troop_info_area[i])
         for status, img in ts_images.items():
             try:
                 im = PIL.Image.open(img_path(img))
@@ -145,20 +152,21 @@ def get_troop_status(troop_slot):
                     break
             except IOError:
                 log('File is missing:', img_path(img))
+    log('get_troop_status:', result)
     return result
 
 
 def gather_super_mine(mode='ordinary'):
-    adb.tap(alliance)
-    adb.tap(territory)
-    adb.tap(super_mine)
+    adb.tap(coords.alliance)
+    adb.tap(coords.territory)
+    adb.tap(coords.super_mine)
 
-    coordinate_locations = [(63, 460, 210, 477),  # farm
-                            (330, 460, 487, 477),  # sawmill
-                            (63, 710, 210, 727),  # iron mine
-                            (330, 710, 487, 727)]  # silver mine
+    # coordinate_locations = [(63, 460, 210, 477),  # farm
+    #                         (330, 460, 487, 477),  # sawmill
+    #                         (63, 710, 210, 727),  # iron mine
+    #                         (330, 710, 487, 727)]  # silver mine
     screenshot = adb.screenshot()
-    for loc in coordinate_locations:
+    for loc in coords.super_mine_coord_locations:
         im = screenshot.crop(loc)
         im = PIL.ImageOps.invert(im)
         result = img2str(im, config=None)
@@ -171,79 +179,127 @@ def gather_super_mine(mode='ordinary'):
         log('No super mine available')
         return False
 
-    adb.tap(screen_center)
+    adb.tap(coords.screen_center)
     time.sleep(3)
 
-    if gather.visible_in(mid_window):
-        adb.tap(gather[0])
+    if coords.gather.visible_in(coords.mid_window):
+        adb.tap(coords.gather[0])
         time.sleep(3)
     else:
         log('Troop in super mine already')
         return False
 
-    if train.visible_in(mid_window):
-        adb.tap(back[0])
+    if coords.train.visible_in(coords.mid_window):
+        adb.tap(coords.back[0])
         log('No troops for gathering')
     else:
         if mode == 'half':
-            adb.tap(half_troop)
+            adb.tap(coords.half_troop)
         elif mode == 'ordinary':
-            adb.tap(slot_preferred)
-            adb.tap(ordinary_slot)
-        adb.tap(march)
-        wait(castle)
+            adb.tap(coords.slot_preferred)
+            adb.tap(coords.ordinary_slot)
+        adb.tap(coords.march)
+        wait(coords.castle)
         log('Go gathering super mine complete')
     return True
 
 
 def go_gathering(res, mode='ordinary'):
-    res_coord = {'food': farm, 'wood': sawmill, 'iron': iron_mine, 'silver': silver_mine}
+    res_coord = {'food': coords.farm, 'wood': coords.sawmill, 'iron': coords.iron_mine, 'silver': coords.silver_mine}
     go_kingdom()
-    adb.tap(magnifier)
+    adb.tap(coords.magnifier)
     time.sleep(3)
     adb.tap(res_coord[res])
-    adb.tap(search)
+    adb.tap(coords.search)
     time.sleep(5)
-    adb.tap(screen_center)
+    adb.tap(coords.screen_center)
     time.sleep(3)
-    adb.tap(gather[0])
+    adb.tap(coords.gather[0])
     time.sleep(3)
-    if train.visible_in(mid_window):
-        adb.tap(back[0])
+    if coords.train.visible_in(coords.mid_window):
+        adb.tap(coords.back[0])
         log('No troops for gathering')
     else:
         if mode == 'half':
-            adb.tap(half_troop)
+            adb.tap(coords.half_troop)
         elif mode == 'ordinary':
-            adb.tap(slot_preferred)
-            adb.tap(ordinary_slot)
-        adb.tap(march)
-        wait(castle)
+            adb.tap(coords.slot_preferred)
+            adb.tap(coords.ordinary_slot)
+        adb.tap(coords.march)
+        wait(coords.castle)
         log('Troops go gathering {}'.format(res))
 
 
 def collect_resource():
-    jump_islands = [(360, 720), (250, 642), (288, 653), (11, 387), (160, 138),
-                    (40, 439), (78, 306), (77, 335), (190, 751), (65, 311),
-                    (303, 186), (453, 142),
-                    ]
+    # jump_islands = [(360, 720), (250, 642), (288, 653), (11, 387), (160, 138),
+    #                 (40, 439), (78, 306), (77, 335), (190, 751), (65, 311),
+    #                 (303, 186), (453, 142),
+    #                 ]
     go_kingdom()
     go_castle()
-    for island in jump_islands:
+    for island in coords.resource_islands:
         adb.tap(island)
     go_kingdom_direct()
 
 
 def repair_wall():
-    jump_islands = [(360, 720), (475, 530), (533, 590), (270, 450), (80, 912),
-                    ]
+    # jump_islands = [(360, 720), (475, 530), (533, 590), (270, 450), (80, 912),
+    #                 ]
     go_kingdom()
     go_castle()
-    for island in jump_islands:
+    for island in coords.wall_repair_islands:
         adb.tap(island)
-    adb.tap(back[0])
+    adb.tap(coords.back[0])
     go_kingdom_direct()
 
 
 def keep_activate():
     adb.swipe([random.choice(['up', 'down', 'left', 'right'])])
+
+
+def img_path(filename):
+    cwd = os.path.dirname(__file__)
+    return os.path.join(cwd, 'image', device.screen_size, filename)
+
+
+def load_coordinates(size):
+    with open('coordinate.yml', 'r') as stream:
+        coordinate = yaml.safe_load(stream)
+
+    coordinate = coordinate[size]
+
+    # areas
+    coords.top_window = coordinate['top_window']
+    coords.mid_window = coordinate['mid_window']
+    coords.bot_window = coordinate['bot_window']
+    coords.troop_info_area = coordinate['troop_info_area']
+    coords.super_mine_coord_locations = coordinate['super_mine_coord_locations']
+    # icons
+    coords.back = Icon(coordinate['back'][0], img_path(coordinate['back'][1]))
+    coords.castle = Icon(coordinate['castle'][0], img_path(coordinate['castle'][1]))
+    coords.kingdom = Icon(coordinate['kingdom'][0], img_path(coordinate['kingdom'][1]))
+    coords.ally_help = Icon(coordinate['ally_help'][0], img_path(coordinate['ally_help'][1]))
+    coords.gather = Icon(coordinate['gather'][0], img_path(coordinate['gather'][1]))
+    coords.train = Icon(coordinate['train'][0], img_path(coordinate['train'][1]))
+    # coordinate
+    coords.screen_center = coordinate['screen_center']
+    coords.tribute = coordinate['tribute']
+    coords.msg_confirm = coordinate['msg_confirm']
+    coords.empty_space = coordinate['empty_space']
+    coords.alliance = coordinate['alliance']
+    coords.territory = coordinate['territory']
+    coords.super_mine = coordinate['super_mine']
+    coords.half_troop = coordinate['half_troop']
+    coords.slot_preferred = coordinate['slot_preferred']
+    coords.ordinary_slot = coordinate['ordinary_slot']
+    coords.march = coordinate['march']
+    coords.magnifier = coordinate['magnifier']
+    coords.search = coordinate['search']
+    coords.farm = coordinate['farm']
+    coords.sawmill = coordinate['sawmill']
+    coords.iron_mine = coordinate['iron_mine']
+    coords.silver_mine = coordinate['silver_mine']
+    # islands
+    coords.resource_islands = coordinate['resource_islands']
+    coords.tribute_islands = coordinate['tribute_islands']
+    coords.wall_repair_islands = coordinate['wall_repair_islands']

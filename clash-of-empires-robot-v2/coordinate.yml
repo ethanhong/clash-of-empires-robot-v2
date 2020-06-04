@@ -1,14 +1,19 @@
 ---
 540x960:
+  # areas
   top_window: [0, 0, 540, 320]
   mid_window: [0, 320, 540, 640]
   bot_window: [0, 640, 540, 960]
+  troop_info_area: [[8, 143, 30, 165], [8, 183, 30, 205], [8, 223, 30, 245], [8, 263, 30, 285]]
+  super_mine_coord_locations: [[63, 460, 210, 477], [330, 460, 487, 477], [63, 710, 210, 727], [330, 710, 487, 727]]
+  # icons
   back: [[30, 35], 'back.png']
   castle: [[65, 890], 'castle.png']
   kingdom: [[65, 890], 'kingdom.png']
   ally_help: [[422, 783], 'ally_help.png']
   gather: [[400, 480], 'gather.png']
   train: [[360, 460], 'train.png']
+  # coordinates
   screen_center: [270, 480]
   tribute: [220, 388]
   msg_confirm: [270, 520]
@@ -26,6 +31,7 @@
   sawmill: [316, 710]
   iron_mine: [405, 710]
   silver_mine: [489, 710]
+  # islands
   resource_islands: [[360, 720], [250, 642], [288, 653], [11, 387], [160, 138],
                      [40, 439], [78, 306], [77, 335], [190, 751], [65, 311],
                      [303, 186], [453, 142]]

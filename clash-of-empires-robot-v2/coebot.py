@@ -3,9 +3,7 @@ import urllib.error
 import urllib.request
 from time import sleep
 
-import yaml
-
-from device import Device
+import device
 from core import *
 
 # global variables
@@ -36,11 +34,13 @@ def initialize():
     adb.kill_server()
     for title, config in configs.items():
         if adb.connect(config['serial_no']) == adb.SUCCESS:
-            device = Device(title, config)
-            device.size = adb.screen_size(config['serial_no'])
-            devices.append(device)
+            d = device.Device(title, config)
+            d.size = adb.screen_size(config['serial_no'])
+            devices.append(d)
 
     adb.cur_serial_no = devices[0].serial_no
+    device.screen_size = devices[0].size
+    load_coordinates(device.screen_size)
 
     log('Initialization finished. There are {} device(s) found.'.format(len(devices)))
     log('Configurations for each device:')
@@ -54,6 +54,8 @@ def switch_window():
     global devices
     devices.append(devices.pop(0))
     adb.cur_serial_no = devices[0].serial_no
+    device.screen_size = devices[0].size
+    load_coordinates(device.screen_size)
     log('[Switched to {}]'.format(devices[0].title))
     t = time.time()
     log(' - resource_collect_time: {}/1200'.
@@ -85,9 +87,9 @@ def restart():
 
     log(' - Launching COE ...')
     adb.launch_coe()
-    wait(kingdom, timeout=300)
+    wait(coords.kingdom, timeout=300)
     time.sleep(3)
-    adb.tap(empty_space)
+    adb.tap(coords.empty_space)
 
     log('Restart successful!')
 

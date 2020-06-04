@@ -1,5 +1,7 @@
 import adb
 
+screen_size = ''
+
 
 class Device(object):
 
