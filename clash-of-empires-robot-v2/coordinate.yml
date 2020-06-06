@@ -16,7 +16,6 @@
   train: [[360, 460], 'train.png']
   # coordinates
   screen_center: [270, 480]
-  tribute: [220, 388]
   msg_confirm: [270, 520]
   empty_space: [380, 50]
   alliance: [480, 915]
@@ -98,7 +97,6 @@
   train: [[720, 920], 'train.png']
   # coordinates
   screen_center: [540, 960]
-  tribute: [440, 776]
   msg_confirm: [540, 1040]
   empty_space: [760, 100]
   alliance: [960, 1830]
