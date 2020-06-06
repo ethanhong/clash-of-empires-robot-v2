@@ -62,7 +62,11 @@ def screenshot():
     run('adb -s {} shell screencap -p /sdcard/screen.png'.format(cur_serial_no))
     run('adb -s {} pull /sdcard/screen.png'.format(cur_serial_no))
     run('adb -s {} shell rm /sdcard/screen.png'.format(cur_serial_no))
-    return PIL.Image.open('screen.png').convert('RGB')
+    im = PIL.Image.open('screen.png').convert('RGB')
+    w, h = im.size
+    if w > h:  # tablet
+        im = im.rotate(270, expand=True)
+    return im
 
 
 def screen_size(serial_no):
