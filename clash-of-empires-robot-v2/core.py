@@ -134,8 +134,9 @@ def get_troop_status(troop_slot):
 
     result = []
     go_kingdom()
+    screenshot = adb.screenshot()
     for i in range(troop_slot):
-        haystack = adb.screenshot().crop(coords.troop_info_area[i])
+        haystack = screenshot.crop(coords.troop_info_area[i])
         for status, img in ts_images.items():
             try:
                 im = PIL.Image.open(img_path(img))
