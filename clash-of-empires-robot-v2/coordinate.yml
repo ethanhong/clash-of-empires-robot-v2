@@ -118,4 +118,43 @@
                      [420, 400]]
   tribute_islands: [[920, 400], [976, 890], [1050, 1010]]
   wall_repair_islands: [[720, 1440], [950, 1060], [1066, 1180], [540, 900], [160, 1824]]
+
+1200x1920:
+  # areas
+  top_window: [0, 0, 1200, 640]
+  mid_window: [0, 640, 1200, 1280]
+  bot_window: [0, 1280, 1200, 1920]
+  troop_info_area: [[16, 286, 60, 330], [16, 366, 60, 410], [16, 446, 60, 490], [16, 526, 60, 570]]
+  super_mine_coord_locations: [[186, 920, 490, 954], [700, 920, 1020, 954], [186, 1420, 490, 1454], [700, 1420, 1020, 1454]]
+  tribute_countdown_box: [530, 1110, 670, 1160]
+  # icons
+  back: [[60, 70], 'back.png']
+  castle: [[195, 1780], 'castle.png']
+  kingdom: [[195, 1780], 'kingdom.png']
+  ally_help: [[965, 1566], 'ally_help.png']
+  gather: [[860, 960], 'gather.png']
+  train: [[780, 920], 'train.png']
+  # coordinates
+  screen_center: [600, 960]
+  msg_confirm: [600, 1040]
+  empty_space: [820, 100]
+  alliance: [1030, 1830]
+  territory: [230, 1010]
+  super_mine: [720, 240]
+  half_troop: [600, 1824]
+  slot_preferred: [220, 1824]
+  ordinary_slot: [820, 1050]
+  march: [970, 1820]
+  magnifier: [80, 1396]
+  search: [600, 1820]
+  farm: [530, 1420]
+  sawmill: [700, 1420]
+  iron_mine: [870, 1420]
+  silver_mine: [1040, 1420]
+  # islands
+  resource_islands: [[370, 1480], [240, 1220], [1120, 1270], [80, 990], [100, 730],
+                     [310, 250], [220, 640], [440, 1500], [520, 620], [850, 260],
+                     [480, 400]]
+  tribute_islands: [[1040, 400], [1020, 890], [1160, 1010]]
+  wall_repair_islands: [[780, 1440], [1010, 1060], [1140, 1200], [670, 873], [220, 1824]]
 ...
