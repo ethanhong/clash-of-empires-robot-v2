@@ -94,6 +94,12 @@ def restart():
     log('Restart successful!')
 
 
+def busy_tribute():
+    t = time.time() - devices[0].tribute_collect_time
+    t = devices[0].tribute_collect_interval - t
+    return t < 120  # means tribute will be ready in 2 minutes
+
+
 def coe_bot():
     global devices
     window_switch_timestamp = 0
@@ -131,14 +137,14 @@ def coe_bot():
                 log('Tribute collect complete. Will be back in', secs2hms(devices[0].tribute_collect_interval))
 
             # --- collect resources --- #
-            if time.time() - devices[0].resource_collect_time > 1200:  # every 20 minutes
+            if not busy_tribute() and time.time() - devices[0].resource_collect_time > 1200:  # every 20 minutes
                 log('Go collecting resources')
                 collect_resource()
                 devices[0].resource_collect_time = time.time()
                 log('Resources collect complete')
 
             # --- repair wall --- #
-            if devices[0].wall_repair and time.time() - devices[0].wall_repair_time > 1800:  # every 30 minutes
+            if not busy_tribute() and devices[0].wall_repair and time.time() - devices[0].wall_repair_time > 1800:
                 log('Start repair wall')
                 repair_wall()
                 devices[0].wall_repair_time = time.time()
