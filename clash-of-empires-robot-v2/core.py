@@ -200,6 +200,10 @@ def go_gathering(res, mode='ordinary'):
     time.sleep(3)
     adb.tap(res_coord[res])
     adb.tap(coords.search)
+    for _ in range(10):  # search for far target to prevent crash with others
+        adb.tap(coords.magnifier)
+        time.sleep(3)
+        adb.tap(coords.search)
     time.sleep(5)
     adb.tap(coords.screen_center)
     time.sleep(3)
