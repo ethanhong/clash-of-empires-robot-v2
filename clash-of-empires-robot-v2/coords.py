@@ -32,6 +32,8 @@ farm = None
 sawmill = None
 iron_mine = None
 silver_mine = None
+res_lvl_up = None
+res_lvl_dn = None
 
 # islands
 resource_islands = None

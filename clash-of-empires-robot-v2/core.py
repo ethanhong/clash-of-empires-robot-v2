@@ -199,11 +199,9 @@ def go_gathering(res, mode='ordinary'):
     adb.tap(coords.magnifier)
     time.sleep(3)
     adb.tap(res_coord[res])
+    adb.tap(coords.res_lvl_up, 2)
+    adb.tap(coords.res_lvl_dn, 2)
     adb.tap(coords.search)
-    for _ in range(10):  # search for far target to prevent crash with others
-        adb.tap(coords.magnifier)
-        time.sleep(3)
-        adb.tap(coords.search)
     time.sleep(5)
     adb.tap(coords.screen_center)
     time.sleep(3)
@@ -286,6 +284,8 @@ def load_coordinates(size):
     coords.sawmill = coordinate['sawmill']
     coords.iron_mine = coordinate['iron_mine']
     coords.silver_mine = coordinate['silver_mine']
+    coords.res_lvl_up = coordinate['res_lvl_up']
+    coords.res_lvl_dn = coordinate['res_lvl_dn']
     # islands
     coords.resource_islands = coordinate['resource_islands']
     coords.tribute_islands = coordinate['tribute_islands']
