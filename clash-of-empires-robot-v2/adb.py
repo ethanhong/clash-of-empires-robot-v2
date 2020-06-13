@@ -78,9 +78,10 @@ def screen_size(serial_no):
     return str(min(out)) + 'x' + str(max(out))  # output a string
 
 
-def tap(coord):
-    run('adb -s {} shell input tap {} {}'.format(cur_serial_no, coord[0], coord[1]))
-    time.sleep(DELAY_BETWEEN_SCREEN_EVENT)
+def tap(coord, n=1):
+    for _ in range(n):
+        run('adb -s {} shell input tap {} {}'.format(cur_serial_no, coord[0], coord[1]))
+        time.sleep(DELAY_BETWEEN_SCREEN_EVENT)
 
 
 def swipe(moves, duration=3000):
