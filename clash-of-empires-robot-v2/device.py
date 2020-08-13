@@ -16,6 +16,7 @@ class Device(object):
         self.resource_collect_time = 0
         self.tribute_collect_time = 0
         self.wall_repair_time = 0
+        self.donation_time = 0
         self.default_tribute_collect_interval = config['default_tribute_collect_interval']
         self.tribute_collect_interval = self.default_tribute_collect_interval
 

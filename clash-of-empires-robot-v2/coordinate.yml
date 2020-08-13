@@ -19,6 +19,13 @@
   msg_confirm: [270, 520]
   empty_space: [380, 50]
   alliance: [480, 915]
+  donation: [206, 620]
+  donation_res: [95, 102]
+  donation_dev: [270, 102]
+  donation_war: [445, 102]
+  donation_item: [270, 250]
+  donation_1click: [270, 750]
+  donation_confirm: [310, 540]
   territory: [85, 505]
   super_mine: [330, 120]
   half_troop: [270, 912]
@@ -61,6 +68,7 @@
   msg_confirm: [360, 700]
   empty_space: [510, 65]
   alliance: [642, 1220]
+  donation: []  # todo
   territory: [110, 670]
   super_mine: [440, 160]
   half_troop: [360, 1218]
@@ -103,6 +111,7 @@
   msg_confirm: [540, 1040]
   empty_space: [760, 100]
   alliance: [960, 1830]
+  donation: []  # todo
   territory: [170, 1010]
   super_mine: [660, 240]
   half_troop: [540, 1824]
@@ -145,6 +154,7 @@
   msg_confirm: [600, 1040]
   empty_space: [820, 100]
   alliance: [1030, 1830]
+  donation: []  # todo
   territory: [230, 1010]
   super_mine: [720, 240]
   half_troop: [600, 1824]

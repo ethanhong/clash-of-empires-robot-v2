@@ -243,6 +243,21 @@ def repair_wall():
     go_kingdom_direct()
 
 
+def donation(donation_group):
+    adb.tap(coords.alliance)
+    adb.tap(coords.donation)
+    adb.tap(donation_group)
+    adb.tap(coords.donation_item)
+    adb.tap(coords.donation_1click)
+    adb.tap(coords.donation_confirm)
+
+    for _ in range(5):  # try 5 times then abort
+        if coords.back.visible_in(coords.top_window):
+            adb.tap(coords.back[0])
+        else:
+            break
+
+
 def keep_activate():
     adb.swipe([random.choice(['up', 'down', 'left', 'right'])])
 
@@ -277,6 +292,13 @@ def load_coordinates(size):
     coords.msg_confirm = coordinate['msg_confirm']
     coords.empty_space = coordinate['empty_space']
     coords.alliance = coordinate['alliance']
+    coords.donation = coordinate['donation']
+    coords.donation_res = coordinate['donation_res']
+    coords.donation_dev = coordinate['donation_dev']
+    coords.donation_war = coordinate['donation_war']
+    coords.donation_item = coordinate['donation_item']
+    coords.donation_1click = coordinate['donation_1click']
+    coords.donation_confirm = coordinate['donation_confirm']
     coords.territory = coordinate['territory']
     coords.super_mine = coordinate['super_mine']
     coords.half_troop = coordinate['half_troop']
