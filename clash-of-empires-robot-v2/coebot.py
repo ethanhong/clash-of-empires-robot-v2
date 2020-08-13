@@ -115,7 +115,7 @@ def coe_bot():
 
             if devices[0].super_mine_gathering \
                     and empty_slot > 0 \
-                    and gather_super_mine(mode='ordinary'):
+                    and gather_super_mine(mode='superior'):
                 empty_slot -= 1
 
             while empty_slot > 0:

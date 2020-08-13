@@ -187,6 +187,9 @@ def gather_super_mine(mode='ordinary'):
         elif mode == 'ordinary':
             adb.tap(coords.slot_preferred)
             adb.tap(coords.ordinary_slot)
+        elif mode == 'superior':
+            adb.tap(coords.slot_preferred)
+            adb.tap(coords.superior_slot)
         adb.tap(coords.march)
         wait(coords.castle)
         log('Go gathering super mine complete')
@@ -277,6 +280,7 @@ def load_coordinates(size):
     coords.half_troop = coordinate['half_troop']
     coords.slot_preferred = coordinate['slot_preferred']
     coords.ordinary_slot = coordinate['ordinary_slot']
+    coords.superior_slot = coordinate['superior_slot']
     coords.march = coordinate['march']
     coords.magnifier = coordinate['magnifier']
     coords.search = coordinate['search']

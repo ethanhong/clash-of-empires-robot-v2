@@ -25,6 +25,7 @@ super_mine = None
 half_troop = None
 slot_preferred = None
 ordinary_slot = None
+superior_slot = None
 march = None
 magnifier = None
 search = None
