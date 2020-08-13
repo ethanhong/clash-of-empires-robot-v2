@@ -79,12 +79,12 @@ def go_castle():
         log('go_castle complete')
 
 
-def ally_need_help():
-    return coords.ally_help.visible_in(coords.bot_window)
-
-
 def help_ally():
-    adb.tap(coords.ally_help[0])
+    pos = coords.ally_help.visible_in(coords.bot_window)  # check if ally needs help
+    if pos is not None:
+        pos = pyautogui.center(pos)
+        adb.tap([pos[0], pos[1]+coords.bot_window[1]])
+        log('Help ally complete')
 
 
 def img2str(im, config):

@@ -11,7 +11,7 @@
   back: [[30, 35], 'back.png']
   castle: [[65, 890], 'castle.png']
   kingdom: [[65, 890], 'kingdom.png']
-  ally_help: [[422, 783], 'ally_help.png']
+  ally_help: [[422, 780], 'ally_help.png']
   gather: [[400, 480], 'gather.png']
   train: [[360, 460], 'train.png']
   # coordinates

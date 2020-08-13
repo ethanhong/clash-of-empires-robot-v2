@@ -106,9 +106,7 @@ def coe_bot():
     while True:
         try:
             # --- ally help --- #
-            if ally_need_help():
-                help_ally()
-                log('Help ally complete')
+            help_ally()
 
             # --- dispatch troops to gather --- #
             troop_status = get_troop_status(devices[0].troop_slot)
