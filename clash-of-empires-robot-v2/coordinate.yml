@@ -66,6 +66,7 @@
   half_troop: [360, 1218]
   slot_preferred: [105, 1218]
   ordinary_slot: [505, 705]
+  superior_slot: [505, 705]
   march: [605, 1218]
   magnifier: [50, 930]
   search: [360, 1210]
