@@ -122,9 +122,9 @@ def collect_tribute():
 
 
 def get_troop_status(troop_slot):
-    ts_images = {'back': 'ts_back.png',
+    ts_images = {'gathering': 'ts_gathering.png',
+                 'back': 'ts_back.png',
                  'enemy_atk': 'ts_enemy_atk.png',
-                 'gathering': 'ts_gathering.png',
                  'monster_atk': 'ts_monster_atk.png',
                  'scouting': 'ts_scouting.png',
                  'transfer': 'ts_transfer.png',
