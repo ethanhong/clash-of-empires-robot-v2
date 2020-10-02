@@ -231,7 +231,7 @@ def collect_resource():
     go_castle()
     for island in coords.resource_islands:
         adb.tap(island)
-    go_kingdom_direct()
+    go_kingdom()
 
 
 def repair_wall():
