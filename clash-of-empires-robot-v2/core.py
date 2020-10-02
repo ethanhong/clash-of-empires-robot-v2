@@ -270,6 +270,21 @@ def img_path(filename):
     return os.path.join(cwd, 'image', device.screen_size, filename)
 
 
+def collect_gift():
+    adb.tap(coords.alliance)
+    adb.tap(coords.alliance_gift)
+    for _ in range(i):
+        im = adb.screenshot()
+        if im.getpixel((coords.gift_collect[0], coords.gift_collect[1]))[0] < 30:
+            break
+        adb.tap(coords.gift_collect)
+    for _ in range(5):  # try 5 times then abort
+        if coords.back.visible_in(coords.top_window):
+            adb.tap(coords.back[0])
+        else:
+            break
+
+
 def load_coordinates(size):
     with open('coordinate.yml', 'r') as stream:
         coordinate = yaml.safe_load(stream)
@@ -296,6 +311,8 @@ def load_coordinates(size):
     coords.empty_space = coordinate['empty_space']
     coords.alliance = coordinate['alliance']
     coords.donation = coordinate['donation']
+    coords.alliance_gift = coordinate['alliance_gift']
+    coords.gift_collect = coordinate['gift_collect']
     coords.donation_res = coordinate['donation_res']
     coords.donation_dev = coordinate['donation_dev']
     coords.donation_war = coordinate['donation_war']

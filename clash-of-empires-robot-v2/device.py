@@ -16,6 +16,7 @@ class Device(object):
         self.super_mine_gathering = config['super_mine_gathering']
         self.resource_type = config['resource_type']
         self.resource_collect_time = 0
+        self.gift_collect_time = 0
         self.tribute_collect_time = 0
         self.wall_repair_time = 0
         self.donation_time = time.time()

@@ -64,6 +64,8 @@ def switch_window():
         format(round(t - devices[0].tribute_collect_time), devices[0].tribute_collect_interval))
     log(' - donation_time: {}/1800'.
         format(round(t - devices[0].donation_time)))
+    log(' - gift_collect_time: {}/1200'.
+        format(round(t - devices[0].gift_time)))
 
 
 def internet_on():
@@ -148,6 +150,13 @@ def coe_bot():
                 donation(coords.donation_war)
                 devices[0].donation_time = time.time()
                 log('Alliance donation complete')
+
+            # --- collect alliance gifts --- #
+            if time.time() - devices[0].gift_collect_time > 1200:  # every 20 minutes
+                log('Go collecting gifts')
+                collect_gift()  # blind click 5 times
+                devices[0].gift_collect_time = time.time()
+                log('Alliance gifts collect complete')
 
             # --- repair wall --- #
             if not busy_tribute() and devices[0].wall_repair and time.time() - devices[0].wall_repair_time > 1800:

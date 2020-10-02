@@ -20,6 +20,8 @@
   empty_space: [380, 50]
   alliance: [480, 915]
   donation: [206, 620]
+  alliance_gift: [206, 500]
+  gift_collect: [465, 250]
   donation_res: [95, 102]
   donation_dev: [270, 102]
   donation_war: [445, 102]
