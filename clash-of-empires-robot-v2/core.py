@@ -60,8 +60,11 @@ def go_kingdom():
 
 
 def go_kingdom_direct():
-    if coords.back.visible_in(coords.top_window):
-        adb.tap(coords.back[0])
+    for _ in range(5):  # try 5 times then abort
+        if coords.back.visible():
+            adb.tap(coords.back[0])
+        else:
+            break
     adb.tap(coords.kingdom[0])
     wait(coords.castle, area=coords.bot_window, timeout=60)
     log('Go kingdom directly')
