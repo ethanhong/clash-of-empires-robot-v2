@@ -273,7 +273,7 @@ def img_path(filename):
 def collect_gift():
     adb.tap(coords.alliance)
     adb.tap(coords.alliance_gift)
-    for _ in range(i):
+    for _ in range(10):
         im = adb.screenshot()
         if im.getpixel((coords.gift_collect[0], coords.gift_collect[1]))[0] < 30:
             break
